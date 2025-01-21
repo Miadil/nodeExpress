@@ -1,6 +1,7 @@
-import express from 'express'
 // const express = require('express')
-import dataCharacters from './dataCharacters';
+import express from 'express'
+import cors from 'cors'
+import dataCharacters from './dataCharacters.js';
 const app = express()
 
 const serverPort = 4242
@@ -11,6 +12,8 @@ const things = [
     { id: 3, name: "Passion" },
   ];
   
+app.use(cors())
+ 
 app.get('/', (req, res) => {
   res.send('je suis sur la route back /')
 })
@@ -28,11 +31,11 @@ app.get('/things/:id', (req, res) => {
   const thing = things.find((thing) => thing.id === wantedId )
   res.json(thing)
 })
-
+//http://localhost:4242/characters
 app.get('/characters', (req, res) => {
-  res.json(dataCharacters)
+  res.status(200).json(dataCharacters)
 })
-
+//http://localhost:4242//spells
 app.get('/spells', (req, res) => {
   res.send('je suis sur la route back /spells')
 })
