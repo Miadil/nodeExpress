@@ -13,7 +13,7 @@ const things = [
   ];
   
 app.use(cors())
- 
+ // http://localhost:4242/
 app.get('/', (req, res) => {
   res.send('je suis sur la route back /')
 })
@@ -35,6 +35,14 @@ app.get('/things/:id', (req, res) => {
 app.get('/characters', (req, res) => {
   res.status(200).json(dataCharacters)
 })
+//http://localhost:4242/characters/:id
+app.get('/characters/:id', (req, res) => {
+  const wantedId = req.params.id // verifier si ya pas de < > (regex)
+  console.log(wantedId);
+  const character = dataCharacters.find((character) => character.id === wantedId )
+  res.json(character)
+})
+
 //http://localhost:4242//spells
 app.get('/spells', (req, res) => {
   res.send('je suis sur la route back /spells')
